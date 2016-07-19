@@ -388,7 +388,7 @@
             this.prefixedTokenName = tokenPrefix ? [tokenPrefix, tokenName].join('_') : tokenName;
         }
         Shared.prototype.getToken = function () {
-            return this.SatellizerStorage.get(this.prefixedTokenName);
+            return JSON.parse(this.SatellizerStorage.get(this.prefixedTokenName));
         };
         Shared.prototype.getPayload = function () {
             var token = this.SatellizerStorage.get(this.prefixedTokenName);
@@ -424,7 +424,7 @@
                 var tokenPath = this.SatellizerConfig.tokenRoot ? this.SatellizerConfig.tokenRoot + '.' + this.SatellizerConfig.tokenName : this.SatellizerConfig.tokenName;
                 return this.$log.warn('Expecting a token named "' + tokenPath);
             }
-            this.SatellizerStorage.set(this.prefixedTokenName, token);
+            this.SatellizerStorage.set(this.prefixedTokenName, JSON.stringify(token));
         };
         Shared.prototype.removeToken = function () {
             this.SatellizerStorage.remove(this.prefixedTokenName);

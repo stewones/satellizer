@@ -17,7 +17,7 @@ class Shared {
   }
 
   getToken(): string {
-    return this.SatellizerStorage.get(this.prefixedTokenName);
+    return JSON.parse(this.SatellizerStorage.get(this.prefixedTokenName));
   }
 
   getPayload(): any {
@@ -60,7 +60,7 @@ class Shared {
       return this.$log.warn('Expecting a token named "' + tokenPath);
     }
 
-    this.SatellizerStorage.set(this.prefixedTokenName, token);
+    this.SatellizerStorage.set(this.prefixedTokenName, JSON.stringify(token));
   }
 
   removeToken(): void {
