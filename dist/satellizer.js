@@ -6,9 +6,10 @@
 
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global.satellizer = factory());
-}(this, function () { 'use strict';
+        typeof define === 'function' && define.amd ? define(factory) :
+            (global.satellizer = factory());
+} (this, function () {
+    'use strict';
 
     var Config = (function () {
         function Config() {
@@ -148,7 +149,7 @@
             configurable: true
         });
         return Config;
-    }());
+    } ());
     ;
 
     var AuthProvider = (function () {
@@ -292,7 +293,7 @@
         };
         AuthProvider.$inject = ['SatellizerConfig'];
         return AuthProvider;
-    }());
+    } ());
 
     function joinUrl(baseUrl, url) {
         if (/^(?:[a-z]+:)?\/\//i.test(url)) {
@@ -458,7 +459,7 @@
         };
         Shared.$inject = ['$q', '$window', '$log', 'SatellizerConfig', 'SatellizerStorage'];
         return Shared;
-    }());
+    } ());
 
     var Local = (function () {
         function Local($http, SatellizerConfig, SatellizerShared) {
@@ -488,7 +489,7 @@
         };
         Local.$inject = ['$http', 'SatellizerConfig', 'SatellizerShared'];
         return Local;
-    }());
+    } ());
 
     var Popup = (function () {
         function Popup($interval, $window) {
@@ -600,7 +601,7 @@
         };
         Popup.$inject = ['$interval', '$window'];
         return Popup;
-    }());
+    } ());
 
     var OAuth = (function () {
         function OAuth($http, SatellizerConfig, SatellizerShared, SatellizerOAuth1, SatellizerOAuth2) {
@@ -635,7 +636,7 @@
         };
         OAuth.$inject = ['$http', 'SatellizerConfig', 'SatellizerShared', 'SatellizerOAuth1', 'SatellizerOAuth2'];
         return OAuth;
-    }());
+    } ());
 
     var OAuth2 = (function () {
         function OAuth2($http, $window, $timeout, SatellizerConfig, SatellizerPopup, SatellizerStorage) {
@@ -755,7 +756,7 @@
         };
         OAuth2.$inject = ['$http', '$window', '$timeout', 'SatellizerConfig', 'SatellizerPopup', 'SatellizerStorage'];
         return OAuth2;
-    }());
+    } ());
 
     var OAuth1 = (function () {
         function OAuth1($http, $window, SatellizerConfig, SatellizerPopup) {
@@ -819,7 +820,7 @@
         };
         OAuth1.$inject = ['$http', '$window', 'SatellizerConfig', 'SatellizerPopup'];
         return OAuth1;
-    }());
+    } ());
 
     var Storage = (function () {
         function Storage($window, SatellizerConfig) {
@@ -853,7 +854,7 @@
         };
         Storage.$inject = ['$window', 'SatellizerConfig'];
         return Storage;
-    }());
+    } ());
 
     var Interceptor = (function () {
         function Interceptor(SatellizerConfig, SatellizerShared, SatellizerStorage) {
@@ -868,7 +869,7 @@
                 if (_this.SatellizerShared.isAuthenticated() && _this.SatellizerConfig.httpInterceptor()) {
                     var tokenName = _this.SatellizerConfig.tokenPrefix ?
                         [_this.SatellizerConfig.tokenPrefix, _this.SatellizerConfig.tokenName].join('_') : _this.SatellizerConfig.tokenName;
-                    var token = _this.SatellizerStorage.get(tokenName);
+                    var token = JSON.parse(_this.SatellizerStorage.get(tokenName));
                     if (_this.SatellizerConfig.tokenHeader && _this.SatellizerConfig.tokenType) {
                         token = _this.SatellizerConfig.tokenType + ' ' + token;
                     }
@@ -882,7 +883,7 @@
         };
         Interceptor.$inject = ['SatellizerConfig', 'SatellizerShared', 'SatellizerStorage'];
         return Interceptor;
-    }());
+    } ());
 
     var HttpProviderConfig = (function () {
         function HttpProviderConfig($httpProvider) {
@@ -891,7 +892,7 @@
         }
         HttpProviderConfig.$inject = ['$httpProvider'];
         return HttpProviderConfig;
-    }());
+    } ());
 
     angular.module('satellizer', [])
         .provider('$auth', ['SatellizerConfig', function (SatellizerConfig) { return new AuthProvider(SatellizerConfig); }])
